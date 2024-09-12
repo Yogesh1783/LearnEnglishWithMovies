@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+       
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+html, body {
+    height: 100%;
+}
+
+.navContainer {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    color: white;
+}
+
+.middleContainer {
+    width: 90%;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.logo {
+    width: 25%;
+    height: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.logo h1 a {
+    text-decoration: none;
+    color: white;
+}
+
+.navItems {
+    width: 65%;
+    height: inherit;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.navItems input {
+    flex: 1;
+    height: 60px;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: #d0a1fa;
+    border: none;
+    font-size: 19px;
+    max-width: 70%;
+}
+
+.navItems button {
+    flex: 0 1 20%;
+    height: 60px;
+    border-radius: 8px;
+    background-color: #300a52;
+    color: white;
+    font-size: 19px;
+    border: none;
+    cursor: pointer;
+    max-width: 100px;
+}
+
+.navItems button:hover {
+    background-color: black;
+    color: white;
+}
+
+.main-container {
+    width: 100%;
+    min-height: calc(100vh - 80px); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    color: white;
+    padding: 20px 0;
+}
+
+.container {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.card {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: orange;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.media {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.data {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color:black;
+    color: white;
+}
+
+.desc {
+    padding-top: 10px;
+    font-size: 18px;
+    text-align: justify;
+}
+
+.heading {
+    padding-top: 10px;
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+@media (max-width: 1024px) {
+    .navItems {
+        gap: 5px;
+    }
+
+    .navItems input {
+        max-width: 60%;
+    }
+
+    .navItems button {
+        max-width: 80px;
+    }
+
+    .container {
+        width: 95%;
+    }
+}
+
+@media (max-width: 768px) {
+    .logo {
+        width: 30%;
+    }
+
+    .navItems {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .navItems input,
+    .navItems button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .middleContainer {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .logo {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .navItems {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .main-container {
+        padding: 10px 0;
+    }
+
+    .card {
+        padding: 10px;
+    }
+
+    .media {
+        max-height: 250px;
+    }
+
+    .desc,
+    .heading {
+        font-size: 16px;
+        padding: 5px 0;
+    }
+}
+</style>
+</head>
+
+<body>
+    <nav class="navContainer">
+        <div class="middleContainer">
+            <div class="logo">
+                <h1><a href="./index.html">E-Learning</a></h1>
+            </div>
+            
+
+        </div>
+    </nav>
+    <div class="main-container">
+        <div class="container" id="container">
+            
+            
+        </div>
+    </div>
+    <script type="module">
+        let container=document.getElementById("container")
+        let movies=JSON.parse(localStorage.getItem("LearnEnglish"))||[]
+        if(movies){ 
+        console.log(movies)
+        movies.map((ele)=>{
+            container.innerHTML=`
+                    <div class="card">
+                    <iframe class="media" width="560" height="315" src=${ele.link}
+                    title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; 
+                    encrypted-media; gyroscope; picture-in-picture;
+                    web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    
+                    
+                </div>
+                <div class="Data">
+                    <h1 class="heading">${ele.name} | ${ele.year} </h1>
+                    <h3></h3>
+                    <h3></h3>
+                    <p class="desc">${ele.desc}</p>
+                    </div>
+                `
+           
+        })
+        // /* localStorage.removeItem("LearnEnglish") */
+    }else{
+        window.close()
+    }
+
+   
+
+    </script>
+</body>
+
+</html>
